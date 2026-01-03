@@ -1,14 +1,23 @@
 <script setup>
-import { ref } from "vue";
-
+import { ref, computed } from "vue";
 const props = defineProps({
+    id: Number,
     name: String,
     logoUrl: String,
     description: String,
     isActive: Boolean,
 });
 
+const emit = defineEmits(['toggle-change']);
 
+const handleToggle = () => {
+    
+}
+
+const toggleId = computed(() => {
+    const baseId = `toggle-${props.name.toLowerCase().replace(/\s+/g, '-')}`;
+    return baseId;
+});
 </script>
 
 <template>
@@ -22,23 +31,18 @@ const props = defineProps({
         </div>
         <div class="card-bottom">
             <button>Remove</button>
-            <input type="checkbox" role="switch">
+            <input class="toggle" type="checkbox" role="switch" :id="toggleId" :checked="props.isActive" @change="handleToggle"> <!-- :checked="props.isActive" -->
+            <label class="label-switch" :for="toggleId">Toggle</label>
         </div>
    </div>
 </template>
 
-<style scoped>
-    .card {
+<style>
+    * {
+        padding: 0;
+        margin: 0;
         box-sizing: border-box;
-        border: 0.6px #575656 solid;
-        border-radius: 15px;
-        width: 330px;
-        background-color: #292941;
-        padding: 12px 6px;
-        flex-shrink: 0;
     }
-    .card-top {
-        display: flex;
-        flex-direction: row;
-    }
+    /* TOGGLE TOGGLE TOGGLE */
+    
 </style>

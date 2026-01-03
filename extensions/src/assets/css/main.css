@@ -1,0 +1,205 @@
+@font-face {
+  font-family: "NotoSans";
+  src: url("../fonts/static/NotoSans-Bold.ttf");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NotoSans";
+  src: url("../fonts/static/NotoSans-Medium.ttf");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NotoSans";
+  src: url("../fonts/static/NotoSans-Regular.ttf");
+  font-weight: 400;
+  font-display: swap;
+}
+* {
+  font-family: "NotoSans";
+}
+:root {
+    --bg-color1: #000000;
+    --bg-color2: #163c67;
+    --text-color: #FFFFFF;
+    --top-bgc: #212121;
+    --theme-btn-color: #0E111d;
+    --cards-bgc: #292941;
+    --remove-btn-color: #E0DFDF;
+    --toggle-btn-col: #DADADA;
+    --toggle-btn-bgcol: #1C1D25;
+}
+[data-theme="light"] {
+    --bg-color1: #afe1df;
+    --bg-color2: #afe1df;
+    --text-color: #091540;
+    --top-bgc: #FFF;
+    --theme-btn-color: #d9d9d9;
+    --cards-bgc: #FFFFFF;
+    --remove-btn-color: #2d2d2d;
+    --toggle-btn-col: #222222;
+    --toggle-btn-bgcol: #ffffff;
+}
+.toggle-buttons button.active {
+    background-color: #c52525;
+    color: #000000;
+}
+.toggle-buttons button:hover {
+    background-color: #d16f6f;
+
+}
+.background {
+  width: 100%;
+  background-image: linear-gradient(var(--bg-color1), var(--bg-color2));
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.top {
+  max-width: 1050px;
+  background-color: var(--top-bgc);
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 10px;
+  border-radius: 10px;
+  margin: 0 auto;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.theme-button {
+  background-color: var(--theme-btn-color);
+  border: none;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+}
+.bottom {
+  max-width: 1050px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  margin: 0 auto;
+  align-items: center;
+}
+.bottom-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.bottom-header h3 {
+  color: var(--text-color);
+  font-size: 25px;
+}
+.toggle-buttons {
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.toggle-buttons button {
+  border: 0.5px #3b3b3b solid;
+  border-radius: 12px;
+  background-color: var(--toggle-btn-bgcol);
+  padding: 6px 8px;
+  color: var(--toggle-btn-col);
+  transition: background-color 0.3s ease-in-out;
+}
+.cards-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  column-gap: 30px;
+  row-gap: 17px;
+  flex-wrap: wrap;
+}
+/* CARDS CARDS CARDS*/
+.toggle-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 25px; 
+    }
+    .toggle {
+        height: 0;
+        width: 0;
+        opacity: 0;
+    }
+    .label-switch {
+        cursor: pointer;
+        text-indent: -9999px;
+        width: 50px;
+        height: 25px;
+        background: gray;
+        display: block;
+        border-radius: 100px;
+        position: relative;
+    }
+    .label-switch::after {
+        content: "";
+        position: absolute;
+        top: 1.25px;
+        left: 1.25px;
+        width: 22.5px;
+        height: 22.5px;
+        background: #FFF;
+        border-radius: 90px;
+        transition: 0.3s;
+    }
+    .toggle:checked + .label-switch {
+        background: #be1d1d;
+    }   
+
+    .toggle:checked + .label-switch::after {
+        left: calc(100% - 1.25px);
+        transform: translateX(-100%);
+    }
+    .label-switch:active:after {
+        width: 32.5px;
+    }
+    /* TOGGLE TOGGLE TOGGLE */
+    .card {
+        box-sizing: border-box;
+        border: 0.6px #575656 solid;
+        border-radius: 15px;
+        width: 330px;
+        background-color: var(--cards-bgc);
+        padding: 14px 14px;
+        flex-shrink: 0;
+    }
+    .card-top {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        margin-bottom: 30px;
+    }
+    .card-name {
+        color: var(--text-color);
+        padding: 0px;
+        margin: 0px;
+    }
+    .card-descr {
+        color: var(--text-color);
+        font-size: 13px;
+    }
+    .logo {
+        margin-right: 20px;
+    }
+    .card-bottom {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .card-bottom button {
+        background-color: inherit;
+        color: var(--remove-btn-color);
+        border-radius: 10px;
+        border: 1px solid var(--remove-btn-color);
+        padding: 4px 10px;
+    }
