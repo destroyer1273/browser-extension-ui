@@ -203,3 +203,10 @@
         border: 1px solid var(--remove-btn-color);
         padding: 4px 10px;
     }
+    .remove-btn {
+      transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+    .remove-btn:hover {
+      background-color: #747474;
+      color: #272626;
+    }

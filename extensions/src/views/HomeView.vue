@@ -38,6 +38,17 @@ const filteredExtensions = computed(() => {
         });
     }
 });
+const handleToggleChange = (extensionId) => {
+  console.log(extensionId);
+  const extension = extensions.value.find(card => card.id == extensionId);
+  extension.isActive = !extension.isActive;
+  console.log(extensions.value);
+}
+const removeCard = (extensionId) => {
+  extensions.value = extensions.value.filter(function(item) {
+    return item.id != extensionId;
+  });
+}
 </script>
 
 <template>
@@ -59,7 +70,7 @@ const filteredExtensions = computed(() => {
         </div>
       </div>
       <div class="cards-container">
-        <ExtensionCard v-for="item in filteredExtensions" :key="item.id" :name="item.name" :logoUrl="item.logo" :description="item.description" :isActive="item.isActive"/>
+        <ExtensionCard v-for="item in filteredExtensions" :key="item.id" :id="item.id" :name="item.name" :logoUrl="item.logo" :description="item.description" :isActive="item.isActive" @toggle-change="handleToggleChange" @remove-card="removeCard"/>
       </div>
     </div>
   </div>

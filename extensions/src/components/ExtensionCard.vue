@@ -8,12 +8,14 @@ const props = defineProps({
     isActive: Boolean,
 });
 
-const emit = defineEmits(['toggle-change']);
+const emit = defineEmits(['toggle-change', 'remove-card']);
 
 const handleToggle = () => {
-    
+    emit('toggle-change', props.id);
 }
-
+const removeCard = () => {
+    emit('remove-card', props.id);
+}
 const toggleId = computed(() => {
     const baseId = `toggle-${props.name.toLowerCase().replace(/\s+/g, '-')}`;
     return baseId;
@@ -30,7 +32,7 @@ const toggleId = computed(() => {
             </div>
         </div>
         <div class="card-bottom">
-            <button>Remove</button>
+            <button @click="removeCard" class="remove-btn">Remove</button>
             <input class="toggle" type="checkbox" role="switch" :id="toggleId" :checked="props.isActive" @change="handleToggle"> <!-- :checked="props.isActive" -->
             <label class="label-switch" :for="toggleId">Toggle</label>
         </div>
