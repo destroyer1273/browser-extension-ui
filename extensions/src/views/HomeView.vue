@@ -16,9 +16,15 @@ const toggleTheme = () => {
 }
 onMounted(async () => {
   try {
-    const response = await fetch('/data/data.json');
-    extensions.value = await response.json();
-    console.log(extensions.value);
+    const localData = await JSON.parse(localStorage.getItem('key'));
+    console.log(localData);
+    if(localData) {
+        extensions.value = localData;
+    } else {
+        const response = await fetch('/data/data.json');
+        extensions.value = await response.json();
+        localStorage.setItem('key', JSON.stringify(extensions.value));
+    }
   } catch (error) {
     console.error('Ошибка загрузки data.json', error);
   } finally {
@@ -38,6 +44,19 @@ const filteredExtensions = computed(() => {
         });
     }
 });
+const handleToggle = (extensionId) => {
+    const extension = extensions.value.find((item) => {
+        return item.id == extensionId;
+    });
+    extension.isActive = !extension.isActive;
+    localStorage.setItem('key', JSON.stringify(extensions.value));
+}
+const removeCard = (extensionId) => {
+    extensions.value = extensions.value.filter((item) => {
+        return item.id !== extensionId;
+    });
+    localStorage.setItem('key', JSON.stringify(extensions.value));
+}
 </script>
 
 <template>
@@ -59,7 +78,7 @@ const filteredExtensions = computed(() => {
         </div>
       </div>
       <div class="cards-container">
-        <ExtensionCard v-for="item in filteredExtensions" :key="item.id" :name="item.name" :logoUrl="item.logo" :description="item.description" :isActive="item.isActive"/>
+        <ExtensionCard v-for="item in filteredExtensions" :key="item.id" :id="item.id" :name="item.name" :logoUrl="item.logo" :description="item.description" :isActive="item.isActive" @toggle-change="handleToggle" @remove-card="removeCard"/>
       </div>
     </div>
   </div>
